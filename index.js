@@ -1,74 +1,47 @@
 import express from "express";
+import { pageHome } from "./pages/pageHome.js";
+import { pageContactUs } from "./pages/pageContactUs.js";
+import { pageLogin } from "./pages/pageLogin.js";
+import { pageRegister } from "./pages/pageRegister.js";
+import { pageSecret } from "./pages/pageSecret.js";
+import { pageNotFound } from "./pages/pageNotFound.js";
+import { pageServices } from "./pages/pageServices.js";
+import { pageService } from "./pages/pageService.js";
+import { pageServiceNotFound } from "./pages/pageServiceNotFound.js";
+import { reqLog } from "./middleware/reqLog.js";
 
 const app = express();
 const port = 5114;
 
-app.get("/", (req, res) => {
-  return res.send(`<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    laba diena cia yr main
-</body>
-</html>`);
-});
+app.use(express.static("public"));
 
-app.get("/services", (req, res) => {
-  return res.send(`<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>SERVICES PAGE</h1>
-    <nav>
-<a href="services/html">HTML</a>
-<a href="services/css">CSS</a>
-<a href="services/js">JS</a>
-<a href="services/git">GIT</a>
-    </nav>
-</body>
-</html>`);
-});
+// global middlewares
+app.use(reqLog);
 
+// routes
+app.get("/", (req, res) => res.send(pageHome(req)));
+app.get("/contact-us", (req, res) => res.send(pageContactUs(req)));
+app.get("/services", (req, res) => res.send(pageServices(req)));
 app.get("/services/:name", (req, res) => {
-  const serviceList = ["html", "css", "js", "git"];
-
   const services = {
     html: "HTML yra cool",
-    css: "CSS yra kietai",
-    js: "JS yra ok",
-    git: "GIT yr GIT",
+    css: "CSS yra grazu",
+    js: "JS tiesiog yra",
+    git: "Git it",
   };
 
   if (services[req.params.name]) {
-    return res.send(services[req.params.name]);
+    return res.send(
+      pageService(req, req.params.name, services[req.params.name])
+    );
   } else {
-    return res.send(`Paslauga "${req.params.name}" nera teikiama`);
+    return res.send(pageServiceNotFound(req, req.params.name));
   }
 });
-
-app.get("/login", (req, res) => {
-  return res.send("Login page");
-});
-
-app.get("/register", (req, res) => {
-  return res.send("Register page");
-});
-
-app.get("/secret", (req, res) => {
-  return res.status(401).send("Secret page");
-});
-
-app.get("*", (req, res) => {
-  return res.send("404 - page not found");
-});
+app.get("/login", (req, res) => res.send(pageLogin(req)));
+app.get("/register", (req, res) => res.send(pageRegister(req)));
+app.get("/secret", (req, res) => res.status(401).send(pageSecret(req)));
+app.get("*", (req, res) => res.status(404).send(pageNotFound(req)));
 
 app.use((req, res, next) => {
   return res.status(404).send("Sorry can't find that!");
