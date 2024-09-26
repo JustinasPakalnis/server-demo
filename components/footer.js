@@ -1,10 +1,8 @@
 import { counter } from "../data/counter.js";
 
 export function footer(count) {
-  return `
+    return `
         <footer class="main-footer">
-            &copy; ${new Date().getFullYear()} - Apsilankymų kiekis: ${
-    counter.value
-  }
+            &copy; ${new Date().getFullYear()} - Apsilankymų kiekis: ${counter.value}
         </footer>`;
 }

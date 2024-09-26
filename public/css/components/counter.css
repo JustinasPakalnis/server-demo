@@ -1,0 +1,13 @@
+.counter {
+  padding: 2rem;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.counter > .btn {
+  width: 5rem;
+  font-size: 3rem;
+}
+.counter > .value {
+  font-size: 2rem;
+}

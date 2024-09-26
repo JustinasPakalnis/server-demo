@@ -1,5 +1,5 @@
 export function header() {
-  return `
+    return `
         <header class="main-header">
             <img class="logo" src="/img/logo.png" alt="Logo">
             <nav class="main-nav">

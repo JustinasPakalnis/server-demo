@@ -3,7 +3,7 @@ import { head } from "../components/head.js";
 import { header } from "../components/header.js";
 
 export function pageServiceNotFound(req, h1) {
-  return `
+    return `
         <!DOCTYPE html>
         <html lang="en">
         ${head()}

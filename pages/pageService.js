@@ -3,7 +3,7 @@ import { head } from "../components/head.js";
 import { header } from "../components/header.js";
 
 export function pageService(req, h1, p) {
-  return `
+    return `
         <!DOCTYPE html>
         <html lang="en">
         ${head()}
