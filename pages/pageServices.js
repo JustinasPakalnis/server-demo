@@ -1,14 +1,8 @@
-import { footer } from "../components/footer.js";
-import { head } from "../components/head.js";
-import { header } from "../components/header.js";
+import { PageTemplate } from "./PageTemplate.js";
 
-export function pageServices(req) {
-    return `
-        <!DOCTYPE html>
-        <html lang="en">
-        ${head()}
-        <body>
-            ${header()}
+export class PageServices extends PageTemplate {
+    main() {
+        return `
             <main>
                 <h1>Services page</h1>
                 <nav>
@@ -17,8 +11,6 @@ export function pageServices(req) {
                     <a href="/services/js">JS</a>
                     <a href="/services/git">GIT</a>
                 </nav>
-            </main>
-            ${footer(req.pageVisitsCount)}
-        </body>
-        </html>`;
+            </main>`;
+    }
 }

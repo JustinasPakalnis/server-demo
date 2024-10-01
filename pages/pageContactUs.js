@@ -1,19 +1,11 @@
-import { footer } from "../components/footer.js";
-import { head } from "../components/head.js";
-import { header } from "../components/header.js";
+import { PageTemplate } from "./PageTemplate.js";
 
-export function pageContactUs(req) {
-    return `
-        <!DOCTYPE html>
-        <html lang="en">
-        ${head()}
-        <body>
-            ${header()}
+export class PageContactUs extends PageTemplate {
+    main() {
+        return `
             <main>
                 <h1>Contact us page</h1>
                 <p>Dabar bulviakasis - netrukdyk 👀</p>
-            </main>
-            ${footer(req.pageVisitsCount)}
-        </body>
-        </html>`;
+            </main>`;
+    }
 }

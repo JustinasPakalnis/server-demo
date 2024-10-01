@@ -1,19 +1,11 @@
-import { footer } from "../components/footer.js";
-import { head } from "../components/head.js";
-import { header } from "../components/header.js";
+import { PageTemplate } from "./PageTemplate.js";
 
-export function pageService(req, h1, p) {
-    return `
-        <!DOCTYPE html>
-        <html lang="en">
-        ${head()}
-        <body>
-            ${header()}
+export class PageService extends PageTemplate {
+    main() {
+        return `
             <main>
-                <h1>${h1} page</h1>
-                <p>${p}</p>
-            </main>
-            ${footer(req.pageVisitsCount)}
-        </body>
-        </html>`;
+                <h1>{{SERVICE NAME}} page</h1>
+                <p>{{SERVICE DESCRIPTION}}</p>
+            </main>`;
+    }
 }

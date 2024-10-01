@@ -1,18 +1,15 @@
 import express from 'express';
-import { pageHome } from './pages/pageHome.js';
-import { pageContactUs } from './pages/pageContactUs.js';
-import { pageLogin } from './pages/pageLogin.js';
-import { pageRegister } from './pages/pageRegister.js';
-import { pageSecret } from './pages/pageSecret.js';
-import { pageNotFound } from './pages/pageNotFound.js';
-import { pageServices } from './pages/pageServices.js';
-import { pageService } from './pages/pageService.js';
-import { pageServiceNotFound } from './pages/pageServiceNotFound.js';
 import { reqLog } from './middleware/reqLog.js';
 import { apiRouter } from './router/apiRouter.js';
-import { PageHome } from './pages-oop/PageHome.js';
-import { PageNotFound } from './pages-oop/PageNotFound.js';
-import { PageLogin } from './pages-oop/PageLogin.js';
+import { PageHome } from './pages/PageHome.js';
+import { PageNotFound } from './pages/PageNotFound.js';
+import { PageLogin } from './pages/PageLogin.js';
+import { PageContactUs } from './pages/PageContactUs.js';
+import { PageRegister } from './pages/PageRegister.js';
+import { PageSecret } from './pages/PageSecret.js';
+import { PageService } from './pages/PageService.js';
+import { PageServiceNotFound } from './pages/PageServiceNotFoundjs.js';
+import { PageServices } from './pages/PageServices.js';
 
 const app = express();
 const port = 5114;
@@ -29,8 +26,8 @@ app.use('/api', apiRouter);
 app.get('/', (req, res) => res.send(new PageHome().render()));
 app.get('/login', (req, res) => res.send(new PageLogin().render()));
 
-app.get('/contact-us', (req, res) => res.send(pageContactUs(req)));
-app.get('/services', (req, res) => res.send(pageServices(req)));
+app.get('/contact-us', (req, res) => res.send(new PageContactUs().render()));
+app.get('/services', (req, res) => res.send(new PageServices().render()));
 app.get('/services/:name', (req, res) => {
     const services = {
         html: 'HTML yra cool',
@@ -40,13 +37,14 @@ app.get('/services/:name', (req, res) => {
     };
 
     if (services[req.params.name]) {
-        return res.send(pageService(req, req.params.name, services[req.params.name]));
+        // return res.send(pageService(req, req.params.name, services[req.params.name]));
+        return res.send(new PageService().render());
     } else {
-        return res.send(pageServiceNotFound(req, req.params.name));
+        return res.send(new PageServiceNotFound().render());
     }
 });
-app.get('/register', (req, res) => res.send(pageRegister(req)));
-app.get('/secret', (req, res) => res.status(401).send(pageSecret(req)));
+app.get('/register', (req, res) => res.send(new PageRegister().render()));
+app.get('/secret', (req, res) => res.status(401).send(new PageSecret().render()));
 
 app.get('*', (req, res) => res.status(404).send(new PageNotFound().render()));
 

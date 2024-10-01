@@ -1,18 +1,10 @@
-import { footer } from "../components/footer.js";
-import { head } from "../components/head.js";
-import { header } from "../components/header.js";
+import { PageTemplate } from "./PageTemplate.js";
 
-export function pageRegister(req) {
-    return `
-        <!DOCTYPE html>
-        <html lang="en">
-        ${head()}
-        <body>
-            ${header()}
+export class PageRegister extends PageTemplate {
+    main() {
+        return `
             <main>
                 <h1>Register page</h1>
-            </main>
-            ${footer(req.pageVisitsCount)}
-        </body>
-        </html>`;
+            </main>`;
+    }
 }

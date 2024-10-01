@@ -1,15 +1,8 @@
-import { carGallery } from "../components/carGallery.js";
-import { footer } from "../components/footer.js";
-import { head } from "../components/head.js";
-import { header } from "../components/header.js";
+import { PageTemplate } from "./PageTemplate.js";
 
-export function pageHome(req) {
-    return `
-        <!DOCTYPE html>
-        <html lang="en">
-        ${head()}
-        <body>
-            ${header()}
+export class PageHome extends PageTemplate {
+    main() {
+        return `
             <main>
                 <h1>Home page</h1>
                 <section class="counter">
@@ -17,10 +10,12 @@ export function pageHome(req) {
                     <span class="value">0</span>
                     <button class="btn" type="button">+</button>
                 </section>
-                ${carGallery()}
-            </main>
-            ${footer(req.pageVisitsCount)}
-            <script src="/js/home.js" type="module"></script>
-        </body>
-        </html>`;
+                <section class="gallery">
+                    <img src="/img/car/1.jpg" alt="Hero car 1" />
+                    <img src="/img/car/2.jpg" alt="Hero car 2" />
+                    <img src="/img/car/3.jpg" alt="Hero car 3" />
+                    <img src="/img/car/4.jpg" alt="Hero car 4" />
+                </section>
+            </main>`;
+    }
 }
